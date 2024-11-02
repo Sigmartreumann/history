@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 80%; max-width: 600px; margin-top: 20px; }
+        .note-list { margin-top: 20px; }
+        .note { background: #f4f4f4; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+        button { padding: 10px 20px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 4px; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Notes</h1>
+        <!-- Button to Create New Note -->
+        <button id="createNoteButton">Create New Note</button>
+
+        <!-- Note Input Form (Initially Hidden) -->
+        <div id="noteInputSection" style="display: none; margin-top: 20px;">
+            <textarea id="noteContent" rows="5" style="width: 100%;" placeholder="Enter your note here..."></textarea><br>
+            <button id="saveNoteButton">Save Note</button>
+        </div>
+
+        <!-- Display Notes -->
+        <div id="noteList" class="note-list"></div>
+    </div>
+
+    <script>
+        // Elements
+        const createNoteButton = document.getElementById('createNoteButton');
+        const noteInputSection = document.getElementById('noteInputSection');
+        const noteContent = document.getElementById('noteContent');
+        const saveNoteButton = document.getElementById('saveNoteButton');
+        const noteList = document.getElementById('noteList');
+
+        // Show the note input section when clicking the "Create New Note" button
+        createNoteButton.addEventListener('click', () => {
+            noteInputSection.style.display = 'block';
+            noteContent.value = ''; // Clear the input field
+        });
+
+        // Save the note and display it in the list
+        saveNoteButton.addEventListener('click', () => {
+            const content = noteContent.value.trim();
+            if (content) {
+                const note = document.createElement('div');
+                note.className = 'note';
+                note.textContent = content;
+                noteList.appendChild(note);
+                noteInputSection.style.display = 'none'; // Hide the input section after saving
+            }
+        });
+    </script>
+</body>
+</html>
